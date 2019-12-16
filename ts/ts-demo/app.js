@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var primitiveType_1 = require("./ts/primitiveType");
+var anyType_1 = require("./ts/anyType");
+var type = new primitiveType_1.PrimitiveType();
+type.booleanTest();
+type.numberTest();
+type.stringTest();
+type.voidTest();
+type.nullAndUndefined();
+var anyType = new anyType_1.AnyType();
+anyType.anyTest();

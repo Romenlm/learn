@@ -1,5 +1,5 @@
 {
-  "name": "demo1",
+  "name": "ts-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tslint": "^5.20.1"
+    "@types/node": "^12.12.17"
   }
 }
