@@ -1,3 +1,4 @@
 ts/ts-demo/node_modules
 .idea
+./webpack/demo1/node_mobile
 
