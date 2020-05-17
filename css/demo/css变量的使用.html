@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>css变量的使用</title>
+  <style>
+    /*定义全局变量*/
+    :root{
+      --button-color: red
+    }
+    .parent{
+      background-color: var(--button-color);
+      width: 100px;
+      border-radius: 5px;
+      padding: 10px 0px;
+      text-align: center;
+    }
+
+    .two{
+      --test: red;
+      background-color: var(--test);
+    }
+    .three{
+      --test: #0b84c1;
+      color: var(--test)
+    }
+    .four{
+      /*---test: #fff;*/
+      color: var(--test)
+    }
+  </style>
+</head>
+<body>
+<div class="parent">
+  按钮
+</div>
+
+<!--变量的继承-->
+<!--如果two中定义变量，four中会继承，one和three中不会继承，在one和three中使用会无效-->
+<div class="one">
+  <div class="two">
+    <div class="four">four</div>
+  </div>
+  <div class="three">three</div>
+</div>
+
+</body>
+</html>
