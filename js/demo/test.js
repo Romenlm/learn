@@ -9,10 +9,24 @@ let obj = {
 console.log(obj.toLocaleString())*/
 
 
-let fun = function () {
+// let fun = function () {
+//
+//     console.log('函数表达式')
+//
+// }
+//
+// fun()
 
-    console.log('函数表达式')
 
+const obj = {
+    name: '张山',
+    age: 20
 }
 
-fun()
+console.log('name' in obj)
+
+console.log('sex' in obj)
+
+let str = Symbol('id')
+
+console.log(str)
