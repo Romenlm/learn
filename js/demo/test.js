@@ -18,15 +18,18 @@ console.log(obj.toLocaleString())*/
 // fun()
 
 
-const obj = {
-    name: '张山',
-    age: 20
-}
+// const obj = {
+//     name: '张山',
+//     age: 20
+// }
+//
+// console.log('name' in obj)
+//
+// console.log('sex' in obj)
+//
+// let str = Symbol('id')
+//
+// console.log(str)
 
-console.log('name' in obj)
-
-console.log('sex' in obj)
-
-let str = Symbol('id')
-
-console.log(str)
+let num = 1.1
+console.log(Math.floor(num))
