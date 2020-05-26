@@ -31,5 +31,15 @@ console.log(obj.toLocaleString())*/
 //
 // console.log(str)
 
-let num = 1.1
-console.log(Math.floor(num))
+// let num = 1.1
+// console.log(Math.floor(num))
+
+let str = 'hello world'
+
+console.log(str.length)
+
+console.log(str.charAt(7))
+
+console.log(str.toUpperCase())
+
+console.log(str.toLowerCase())
