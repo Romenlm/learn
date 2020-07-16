@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>视频采集</title>
+</head>
+<body>
+<h3>视频采集</h3>
+<video autoplay playsinline></video>
+<script>
+  const mediaStreamContrains = { video: true};
+  const localVideo = document.querySelector('video')
+  // function getLocalMediaStream(media) {
+  //   localVideo.srcObject = media
+  //
+  // }
+  // 收集视屏
+  navigator.mediaDevices.getUserMedia(mediaStreamContrains).then(res=>{
+    localVideo.srcObject = res
+  })
+
+</script>
+
+</body>
+</html>
