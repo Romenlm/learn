@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button>防抖</button>
+
+
+</body>
+<script>
+function  debounce(fun){
+  let timeout = null
+  return function () {
+    clearTimeout(timeout)
+    timeout = setTimeout(()=>{
+      fun.apply(this,arguments)
+    },500)
+  }
+}
+
+function  fangdou() {
+  console.log('防抖成功')
+}
+
+let button = document.querySelector('button')
+  button.addEventListener('click',debounce(fangdou))
+</script>
+</html>
