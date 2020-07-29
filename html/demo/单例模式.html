@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>单例模式</title>
+</head>
+<body>
+
+<script>
+
+  //实现Storage，使得该对象为单例，基于 localStorage 进行封装。实现方法 setItem(key,value) 和 getItem(key)。
+
+  // 静态方法实现版本
+  class Storage{
+    static getInstance(){
+      // 判断是否已经new过一个实例，如果不存在就创建他
+      if(!Storage.instance){
+        Storage.instance = new Storage()
+      }
+      // 如果存在就直接返回
+      return Storage.instance
+    }
+    getItem(key){
+      return localStorage.getItem(key)
+    }
+    setItem(key,value){
+      return localStorage.setItem(key,value)
+    }
+  }
+
+  const str1 = Storage.getInstance()
+  const str2 = Storage.getInstance()
+
+  str1.setItem('name','luomen')
+  let s = str2.getItem('name')
+  console.log(s)
+  console.log(str1 === str2)
+
+
+  // 闭包实现版本
+
+  /**
+   * 先实现一个基础的StorageBase类，把getItem和setItem方法放在它的原型链上
+   * @constructor
+   */
+  function StorageBase() {
+    StorageBase.prototype.getItem = function (key) {
+      return localStorage.getItem(key)
+    }
+    StorageBase.prototype.setItem = function (key,value) {
+      return localStorage.setItem(key,value)
+    }
+  }
+
+  // 以闭包的形式创建一个引用自由变量的构造函数
+  const Storages = (function () {
+      let instance = null
+    return function () {
+        // 判断自由变量是否为null,如果为null,new出唯一实例
+        if(!instance){
+          instance = new StorageBase()
+        }
+        return instance
+    }
+  })()
+  // 这里其实不用 new Storage 的形式调用，直接 Storage() 也会有一样的效果
+  const storage1 = new Storages()
+  const storage2 = new Storages()
+
+  storage1.setItem('name', '李雷')
+  // 李雷
+  console.log(storage1.getItem('name'))
+  // 也是李雷
+  console.log(storage2.getItem('name'))
+
+  // 返回true
+  console.log(storage1 === storage2)
+</script>
+
+</body>
+</html>
