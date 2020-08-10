@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试数据</title>
+</head>
+<body>
+<script>
+
+    const obj = {
+        name: '张三'
+    }
+    console.log(obj)
+    // 测试prototype
+    function User(){
+        let name = '张三'
+    }
+    let user = new User()
+
+    console.log(user)
+    console.log(User.prototype)
+    console.log(user.prototype) // 实例对象没有prototype
+</script>
+</body>
+</html>

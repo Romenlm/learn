@@ -33,13 +33,39 @@ console.log(obj.toLocaleString())*/
 
 // let num = 1.1
 // console.log(Math.floor(num))
+//
+// let str = 'hello world'
+//
+// console.log(str.length)
+//
+// console.log(str.charAt(7))
+//
+// console.log(str.toUpperCase())
+//
+// console.log(str.toLowerCase())
 
-let str = 'hello world'
 
-console.log(str.length)
+// for ... in 循环迭代
 
-console.log(str.charAt(7))
+// const admin = {
+//     eats: true
+// }
+//
+// let rabbit = {
+//     jumps: true,
+//     __proto__ : admin
+// }
+//
+// for(let key in rabbit){
+//     console.log(key)
+// }
+// 先输出jumps后输出eats
 
-console.log(str.toUpperCase())
+// prototype
 
-console.log(str.toLowerCase())
+function User(){
+    name: '张三'
+}
+let user = new User()
+
+console.log(user)
