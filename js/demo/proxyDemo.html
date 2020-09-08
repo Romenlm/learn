@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy</title>
+</head>
+<body>
+
+<script>
+    /** 1. 没有任何陷阱代理 */
+   /* let target = {
+        name: '李四'
+    }
+    let proxy = new Proxy(target,{})
+    proxy.name = '张三'
+    console.log(target.name)
+    console.log(target.name)
+    console.log('--------------')
+    for(let key in proxy){
+       console.log(key)
+    }
+    */
+
+
+    /** 2. 使用 get 陷阱 */
+    // 数组
+    let arr = [1,2,3,4]
+    let proxy = new Proxy(arr,{
+        get(target, property) {
+            if(target[property]){
+                return target[property]
+            } else {
+                return '没有这个下标数据'
+            }
+        }
+    })
+    console.log(proxy[1])
+    console.log(proxy[12])
+</script>
+</body>
+</html>
