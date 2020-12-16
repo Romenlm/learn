@@ -1,4 +1,8 @@
 ts/ts-demo/node_modules
 .idea
 webpack/demo1/node_modules
-
+webpack/demo2/node_modules
+webpack/demo3/node_modules
+webpack/demo4/node_modules
+webpack/demo5/node_modules
+*/node_modules

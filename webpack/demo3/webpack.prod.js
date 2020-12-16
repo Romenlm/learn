@@ -1,17 +1,27 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const webpack = require('webpack')
 module.exports = {
-  mode: 'production', // 打包模式，production模式压缩打包后的代码。development表示不压缩
+  mode: 'production', // 打包模式，production 模式压缩打包后的代码。development 表示不压缩
+  // 表示映射源码中的代码，能够快速定位到代码报错位置，具体配置可以参考webpack文档devtool配置
+  // 对于production使用 cheap-module-source-map,
+  // 对于development 使用cheap-module-eval-source-map 即可
+  devtool: 'cheap-module-source-map',
+  // devtool: 'cheap-module-source-map',
   /**
    * entry入口文件，可以配置多个入口
    */
   entry: {
-    main: './src/index.js',
-    sub: './src/index.js'
+    main: './src/index.js'
   },
   module: { // 打包模块
     rules: [ // 规则，以数组形式存在
+      {  // es6转换为es5
+        test: /\.js$/,
+        exclude: /node_modules/, // 表示不用翻译
+        loader: "babel-loader"
+      },
       {
         test: /\.(jpg|png|gif)/, // 匹配的文件
         use: {
@@ -33,13 +43,6 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          // {
-          //   loader: 'css-loader',
-          //   options: {
-          //     module: false, // 表示样式模块打包
-          //     importLoaders: 2 // 在scss文件中引入scss文件，@import '文件名' 也要走‘sass-loader’和‘postcss-loader’，以保证引入文件从下往上都会执行
-          //   }
-          // },// 打包样式需要使用这两个loader
           'sass-loader', // 使用第三方css语法样式
           'postcss-loader'
         ]
@@ -62,5 +65,5 @@ module.exports = {
     //filename: 'bundle.js', // 打包后的文件，如果没有此配置，生成的文件是main.js,
     filename: 'js/[name]_[hash].mini.js',// 使用占位符表示打包出口的文件名和入口文件名相同,打包完成后会出现多个js文件。有几个入口就有几个出口文件
     path: path.resolve(__dirname, 'dist') // 打包后放到哪一个文件夹下，绝对路径,__dirname表示当前路径
-  },
+  }
 }
