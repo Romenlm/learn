@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            display: block;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            /*表示宽度变化，hover时延迟1s发生变化，linear表示线性变化，是一个函数，1s表示过度时间*/
+            transition: width 1s linear 1s;
+        }
+
+        .box:hover {
+            width: 500px;
+        }
+
+        .demo1{
+            margin: 20px 20px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            /* 动画属性设置transform */
+            transition: transform ease-in 1s;
+        }
+        .demo1:hover {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+</div>
+<!--与transform一起使用-->
+<div class="demo1">
+</div>
+</body>
+</html>

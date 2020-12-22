@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            display: block;
+            width: 500px;
+            height: 500px;
+            background-color: red;
+        }
+        .cell{
+            height: 100px;
+            width: 100px;
+            background-color: #0b84c1;
+        }
+        .box:hover .cell{
+            /*move表示动画名称，2s过度时间，linear过度函数，infinite无限循环播放,alternate表示轮流播放*/
+            animation: move 4s linear infinite alternate;
+        }
+        @keyframes move {
+            100%{
+                transform: translateX(200px);
+            }
+        }
+
+        .demo{
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-top: 200px;
+            background-color: #171313;
+            border-radius: 15px;
+            animation: jump 5s ease-in 1 alternate;
+        }
+
+        @keyframes jump {
+            15%{
+                transform: translateY(-100px);
+            }
+            30%{
+                transform: translateY(0px);
+            }
+            45%{
+                transform: translateY(-70px);
+            }
+            55%{
+                transform: translateY(0px);
+            }
+            65%{
+                transform: translateY(-50px);
+            }
+            75%{
+                transform: translateY(0px);
+            }
+            85%{
+                transform: translateY(-30px);
+            }
+            100%{
+                transform: translateY(0px);
+                /*clip-path: ellipse(50% 45% at 50% 45%);*/
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="loading">
+    <div class="cell"></div>
+</div>
+<!--跳动元素-->
+<div class="demo">
+</div>
+</body>
+</html>

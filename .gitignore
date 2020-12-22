@@ -5,5 +5,10 @@ webpack/demo2/node_modules
 webpack/demo3/node_modules
 webpack/demo4/node_modules
 webpack/demo5/node_modules
+webpack/demo1/dist
+webpack/demo2/dist
+webpack/demo3/dist
+webpack/demo4/dist
+webpack/demo5/dist
 */node_modules
 */dist
