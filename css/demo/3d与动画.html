@@ -1,0 +1,138 @@
+<!--
+ * @Author: luomenlm
+ * @Date: 2020-12-30 15:20:16
+ * @LastEditTime: 2020-12-31 14:04:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learn/css/demo/3d与动画.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d与动画</title>
+    <style>
+        .main-box{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            width: 500px;
+            margin: 100px auto;
+            /* background-color: rgba(0, 0, 0, 1); */
+            perspective: 1000;
+            perspective-origin: 50% 50%;
+            transform-style: preserve-3d;
+            -webkit-perspective: 1000;
+            -webkit-perspective-origin: 50% 50%;
+            -webkit-transform-style: preserve-3d;
+            /* transform: translateX(-50%) translateY(-50%); */
+            /* -webkit-transform: translateX(-50%) translateY(-50%); */
+        }
+        .back-box{
+            display: block;
+            height: 200px;
+            width: 200px;
+            /* background-color: rgba(0, 0, 0, 1); */
+            position: relative;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            transform: rotateX(90deg);
+            -webkit-transform: rotateX(45deg) rotateY(45deg);
+            /* animation: move 6s linear infinite; */
+        }
+        .back-box:hover .page{
+            width: 180px;
+            height: 180px;
+        }
+        .page{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 30px currentColor;
+            color: #fff;
+        }
+        .page-top{
+            transform: translateY(-100px) rotateY(-90deg);
+            -webkit-transform: translateY(-100px) rotateX(-90deg);
+        }
+        .page-bottom{
+            transform: translateY(100px) rotateY(90deg);
+            -webkit-transform: translateY(100px) rotateX(90deg) ;
+        }
+        .page-left{
+            transform: translateX(-100px) rotateY(-90deg);
+            -webkit-transform: translateX(-100px) rotateY(-90deg);
+        }
+        .page-right{
+            transform: translateX(100px) rotateY(90deg);
+            -webkit-transform: translateX(100px) rotateY(90deg);
+        }
+        .page5{
+            transform: translateZ(100px);
+            -webkit-transform: translateZ(100px);
+        }
+        .page6{
+            transform: translateZ(-100px);
+            -webkit-transform: translateZ(-100px);
+        }
+
+        /*帧动画*/
+    @keyframes move{
+        0%{
+            transform:rotateX(0deg) rotateY(0deg) rotateZ(0deg) ;
+        }
+        100%{
+            transform:rotateX(720deg) rotateY(360deg) rotateZ(360deg);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- 设置3d场景
+        
+        perspective: 880; 设置3d场景，表示3d场景离800像素远
+        perspective-origin: 50% 50%; 从什么位置看3维场景，50% 50% 表示浏览器中心
+
+        transform属性操作
+        - translate 表示位移
+            1. translateX (xpx)
+            2. translateY (xpx)
+            3. translateZ (xpx)
+
+        - rotate 表示旋转
+            1. rotateX(xdeg)
+            2. rotateY(xdeg)
+            3. rotateZ(xdeg)
+
+        - transform-origin 表示调整旋转中心
+            X
+                - left
+                - center
+                - right
+            Y 
+                - top
+                - center
+                - bottom
+            Z
+                - length px
+    
+    -->
+
+    <div class="main-box">
+        <div class="back-box">
+            <div class="page page-top">top</div>
+            <div class="page page-bottom">bottom</div>
+            <div class="page page-left">left</div>
+            <div class="page page-right">right</div>
+            <div class="page page5">5</div>
+            <div class="page page6">6</div>
+        </div>
+    </div>
+</body>
+</html>

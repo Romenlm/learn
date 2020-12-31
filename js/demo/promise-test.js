@@ -37,17 +37,46 @@ p.then(res=>{
   console.log(err)
 })*/
 
-let arr = [1,2,3].map(item=>{
-  let p = new Promise((resole,reject)=>{
-    setTimeout(()=>{
-      resole(item)
-    },item*1000)
-  })
-  return p
+// let arr = [1,2,3].map(item=>{
+//   let p = new Promise((resole,reject)=>{
+//     setTimeout(()=>{
+//       resole(item)
+//     },item*1000)
+//   })
+//   return p
+// })
+
+// Promise.all(arr).then(result=>{
+//   console.log(result)
+// }).catch(err=>{
+//   console.log(err)
+// })
+
+/**
+ * 链式promise
+ */
+
+ const promise = new Promise((resolve,reject)=>{
+   resolve(1)
+ })
+ const promise2 = new Promise((resolve,reject)=>{
+  resolve('测试')
+})
+ promise.then((res)=>{
+   console.log('===='+res)
+   return res+1
+ }).then(res=>{
+   console.log('====='+res)
+   return res+1
+ }).then(res=>{
+  console.log('====='+res)
+  // return res+1
+ }).then(res=>{
+   console.log('----------'+res) // undefined,因为上一个链式没有返回数据
+ })
+
+promise2.then(res=>{
+  console.log(res)
 })
 
-Promise.all(arr).then(result=>{
-  console.log(result)
-}).catch(err=>{
-  console.log(err)
-})
+// 以上代码结果是1，测试，2，3，undefined
