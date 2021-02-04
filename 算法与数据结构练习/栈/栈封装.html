@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>栈封装实现</title>
+</head>
+<body>
+
+<script>
+    class Stack {
+        // 创建一个私有数组，用来表示栈
+        #item = []
+
+        // 添加一个新元素到栈顶
+        push(data) {
+            this.#item.push(data)
+        }
+
+        // 移除栈顶的元素,同时返回被移除的元素
+        pop() {
+            return this.#item.pop()
+        }
+
+        // 返回栈顶的元素，但是不对栈顶元素做任何操作
+        peek() {
+            return this.#item[this.#item.length - 1]
+        }
+
+        // 判断栈是否为空，如果为空返回true,否则返回false
+        isEmpty() {
+            return this.#item.length === 0
+        }
+
+        // 返回栈元素的个数
+        size(){
+            return this.#item.length
+        }
+
+        // 将栈结构的内容以字符串形式打印出来
+        toString(){
+            return this.#item.join(' ')
+        }
+
+    }
+
+    // 测试
+    const stack = new Stack()
+    // 天机元素
+    stack.push('aa')
+    stack.push('bb')
+    stack.push('cc')
+    stack.push('dd')
+    // 移除栈顶元素
+    console.log(stack.pop())
+    // 获取栈顶元素
+    console.log(stack.peek())
+    console.log(stack.isEmpty())
+    console.log(stack.size())
+    console.log(stack.toString())
+</script>
+</body>
+</html>

@@ -31,12 +31,12 @@
  * @return {number}
  */
 var reverse = function(x) {
-    if(x<0){
-
-    } else {
-        return Number(x.toString().split('').reverse().join(''))
+    let result = 0
+    while (x!==0){
+        result = result*10+x%10
+        x = (x/10)|0
     }
-
+    return (result|0) === result?result:0
 };
 
-console.log(reverse(-10020))
+console.log(reverse(12345678))

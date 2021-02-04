@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>队列的实现</title>
+</head>
+<body>
+
+<script>
+    class Queue{
+        // 使用数组新创建一个队列
+        #item = []
+        // 队列尾部添加一个数据
+        enqueue(element){
+            this.#item.push(element)
+        }
+        // 队列头部删除一个数据并返回此数据
+        dequeue(){
+           return this.#item.shift()
+        }
+        // 返回队列中的第一个元素
+        front(){
+            return this.#item[0]
+        }
+        // 判断队列是否为空
+        isEmpty(){
+            return this.#item.length === 0
+        }
+        // size返回队列大写
+        size(){
+            return this.#item.length
+        }
+        // 以字符串形式返回队列中的数据
+        toString(){
+            return this.#item.join(' ')
+        }
+    }
+    const queue = new Queue()
+    queue.enqueue('aaa')
+    queue.enqueue('bbb')
+    queue.enqueue('ccc')
+    queue.enqueue('ddd')
+    console.log(queue.dequeue())
+    console.log(queue.isEmpty())
+    console.log(queue.front())
+</script>
+</body>
+</html>
