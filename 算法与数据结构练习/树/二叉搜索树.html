@@ -1,0 +1,176 @@
+<!--
+ * @Author: luomenlm
+ * @Date: 2021-02-19 15:58:36
+ * @LastEditTime: 2021-02-20 17:13:16
+ * @LastEditors: Please set LastEditors
+ * @Description: 二叉树的封装与遍历
+ * @FilePath: /learn/算法与数据结构练习/树/树.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉搜索树</title>
+  </head>
+  <body>
+    <script>
+      // 二叉搜索树的特性查找效率非常高
+      // 每个节点都有right,key,left三个属性即右节点，key与左节点，二叉搜索树左子树key永远小于父节点的key,右子树key永远大于父节点的key
+
+      class Node {
+        constructor(key) {
+          this.key = key;
+          this.left = null;
+          this.right = null;
+        }
+      }
+      class BinarySearchTree {
+        // 属性
+        // 节点对象
+        Node = function (key) {
+          this.key = key;
+          this.left = null;
+          this.right = null;
+        };
+        #root = null;
+
+        // 方法
+        // 插入函数
+        insert(key) {
+          // 根据key创建节点
+          const node = new Node(key);
+          // 判断根节点是否有值
+          if (!this.#root) {
+            this.#root = node;
+          } else {
+            this.#insertNode(this.#root, node);
+          }
+        }
+        /** 递归比较节点，将节点放到对应的位置
+         * @description:
+         * @param {*} node 已存在的树节点
+         * @param {*} newNode 新建的节点
+         * @return {*}
+         */
+        #insertNode(node, newNode) {
+          if (newNode.key < node.key) {
+            // 向左查找,并判断和比较
+            if (node.left === null) {
+              node.left = newNode;
+            } else {
+              this.#insertNode(node.left, newNode);
+            }
+          } else {
+            // 向右查找
+            if (node.right === null) {
+              node.right = newNode;
+            } else {
+              this.#insertNode(node.right, newNode);
+            }
+          }
+        }
+
+        /**
+         * @description: 先序遍历
+         * @param {*} handler 回调函数，将key值返回到回调函数中处理
+         * @return {*}
+         */
+        preOrderTraversal(handler){
+          this.#preOrderTraversalNode(this.#root, handler)
+
+        }
+        /**对某个节点进行遍历，需要递归遍历
+         * @description: 
+         * @param {*} node 当前的节点
+         * @return {*}
+         */
+        #preOrderTraversalNode(node, handler){
+          if( node !== null ){
+            handler(node.key)
+            // 处理经过的节点
+            this.#preOrderTraversalNode(node.left,handler)
+            this.#preOrderTraversalNode(node.right,handler)
+          }
+        }
+
+        /**
+         * @description: 中序遍历
+         * @param {*} handler
+         * @return {*}
+         */
+        midOrderTraversal(handler){
+          this.#midOrderTraversalNode(this.#root,handler)
+        }
+        // 中序遍历递归
+        #midOrderTraversalNode(node, handler){
+          if(node !== null){
+            // 处理左子树中的节点
+            this.#midOrderTraversalNode(node.left,handler)
+            // 处理节点
+            handler(node.key)
+            this.#midOrderTraversalNode(node.right,handler)
+          }
+        }
+        /**
+         * @description: 后序遍历
+         * @param {*} handler
+         * @return {*}
+         */
+         postOrderTraversal(handler){
+          this.#postOrderTraversalNode(this.#root,handler)
+        }
+        // 中序遍历递归
+        #postOrderTraversalNode(node, handler){
+          if(node !== null){
+            // 处理左子树中的节点
+            this.#postOrderTraversalNode(node.left,handler)
+            // 处理右边
+            this.#postOrderTraversalNode(node.right,handler)
+            // 处理根节点
+            handler(node.key)
+          }
+        }
+      }
+
+      const bt = new BinarySearchTree();
+      bt.insert(11);
+      bt.insert(7);
+      bt.insert(15);
+      bt.insert(5);
+      bt.insert(3);
+      bt.insert(9);
+      bt.insert(8);
+      bt.insert(10);
+      bt.insert(13);
+      bt.insert(12);
+      bt.insert(14);
+      bt.insert(20);
+      bt.insert(18);
+      bt.insert(25);
+      bt.insert(6);
+      console.log(bt);
+
+
+      let str = ''
+      bt.preOrderTraversal((key)=>{
+        str += key+' '
+      })
+      console.log(str)
+      // 测试中序遍历
+
+      let mindStr = ''
+      bt.midOrderTraversal((key)=>{
+        mindStr += key+' '
+      })
+      console.log(mindStr)
+      // 测试后序遍历
+      let postStr = ''
+      bt.postOrderTraversal((key)=>{
+        postStr += key+' '
+      })
+      console.log(postStr)
+    </script>
+  </body>
+</html>

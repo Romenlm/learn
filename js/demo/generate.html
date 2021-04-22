@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>generate</title>
+</head>
+<body>
+
+<script>
+  function* generateSequence(){
+    yield 1
+    yield 2
+    yield 3
+    return  4
+  }
+  let g = generateSequence()
+  let one = g.next()
+  let t = g.next()
+  let th = g.next()
+  let f = g.next()
+  console.log(one)
+  console.log(t)
+  console.log(th)
+  console.log(f)
+
+  console.log('================')
+  let gg = generateSequence()
+  for(let value of gg){
+    console.log(value) // 不会返回最后一个，如果要反复最后一个return返回的数据，将return改为yield就可以返回
+  }
+</script>
+</body>
+</html>

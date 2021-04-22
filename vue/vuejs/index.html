@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-07 14:10:39
+ * @LastEditTime: 2021-02-08 17:01:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /vuejs/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue简单实现</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{person.name}} --- {{person.age}}</h2>
+  <h3>{{person.fav}}</h3>
+  <ui>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+  </ui>
+  <div v-text="msg"></div>
+  <div v-text="person.name"></div>
+  <div v-html="htmlStr"></div>
+  <input v-model="msg" type="text">
+  <button v-on:click="btn">按钮</button>
+  <div v-bind:title="title">title</div>
+  <div :title="title">测试bind简写</div>
+</div>
+<script src="MVue.js"></script>
+<script src="Observer.js"></script>
+<script>
+  let vm = new MVue({
+    el: '#app',
+    data:{
+      person: {
+        name: 'luomen',
+        age: 20,
+        fav: '前端编程'
+      },
+      title: '提示',
+      msg: '学习mvvm实现原理',
+      htmlStr: '<h3>你好，世界！</h3>'
+
+    },
+    methods: {
+      btn(){
+        console.log(this)
+        this.msg = 'lllll'
+      }
+    },
+  })
+</script>
+</body>
+</html>

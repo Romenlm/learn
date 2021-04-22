@@ -63,9 +63,14 @@ console.log(obj.toLocaleString())*/
 
 // prototype
 
-function User(){
-    name: '张三'
-}
-let user = new User()
+// function User(){
+//     name: '张三'
+// }
+// let user = new User()
+//
+// console.log(user)
 
-console.log(user)
+let f = new Function('a','console.log(a)')
+
+f(10)
+

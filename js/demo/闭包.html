@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>闭包</title>
+</head>
+<body>
+  <script>
+    // function fun(){
+    //   let n = 0;
+    //   return function sum(){
+    //     console.log(n++)
+    //   }
+    // }
+    // let a = fun()
+    // a(); // 0 // 只要返回的函数被使用，那么fun函数就不会被回收。fun中的数据n也是被共享的
+    // a(); // 1
+    // a(); // 2
+
+    let arr = [2,5,6,7,8,11,3,55,44,33];
+    function between(a,b){
+      return function(v){
+        return a < v && v < b
+      }
+    }
+    let a = between(5,50)
+    console.log(arr.filter(item=>{
+      
+      return a(item)
+    }))
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>链表</title>
+</head>
+<body>
+
+<script>
+  class LinkedList {
+    // 封装内部类，用于保存每个节点的信息。一个节点有内容和下一个节点
+    Node = function (element) {
+      this.element = element
+      this.next = null
+    }
+    // 表示链表中的属性，长度和头部
+    #length = 0
+    #head = null
+
+    /**
+     * 链表后面追加一个数据
+     * @param element
+     */
+    append(element) {
+      const node = new this.Node(element)
+      // 判断链表是否为空
+      if (this.#head === null) {
+        this.#head = node
+      } else {
+        // 定义一个变量保存当前找到的节点
+        let current = this.#head
+        while (current.next) {
+          current = current.next
+        }
+        current.next = node
+      }
+      this.#length++
+    }
+
+    /**
+     * 打印链表中的所有数据
+     * @returns {string}
+     */
+    toString() {
+      // 定义一个变量存储当前节点
+      let current = this.#head
+      let str = ''
+      while (current) {
+        str += ',' + current.element
+        current = current.next
+      }
+
+      return str.slice(1)
+    }
+
+    /**
+     * 根据位置插入元素
+     * @param position 指定的位置
+     * @param element 插入的元素
+     */
+    insert(position, element) {
+      // 边界检查
+      if (position < 0 || position > this.#length) return false
+      let newNode = new this.Node(element)
+      let current = this.#head
+      let previous = null // 当前的中间节点
+      let index = 0
+      // 如果位置为0，将头部修改为插入的数据
+      if (position === 0) {
+        newNode.next = current
+        this.#head = newNode
+      } else {
+        while (index++ < position) {
+          previous = current
+          current = current.next
+        }
+        newNode.next = current
+        previous.next = newNode
+      }
+      this.#length++
+      return true
+    }
+
+    /**
+     * 根据节点位置移除节点
+     * @param position 要删除节点的位置
+     * @returns {null|*} 如果节点位置满足，删除节点并返回节点的内容，如果节点位置不满足则返回null
+     */
+    removeAt(position) {
+      // 判断边界情况
+      if (position < 0 || position > this.#length) {
+        return null
+      }
+      let current = this.#head
+      let previous = null
+      let index = 0
+      // 判断是否移除第一项
+      if (position === 0) {
+        this.#head = current.next
+      } else {
+        while (index++ < position) {
+          previous = current
+          current = current.next
+        }
+        // 将上一个节点的下一个节点指向要移除节点的下一个节点
+        previous.next = current.next
+      }
+      // 链表长度减1
+      this.#length--
+      return current.element
+
+    }
+
+    /**
+     * 根据元素找所在位置
+     * @param element 内容
+     * @returns {number} 返回所在的位置，如果没有返回-1
+     */
+    indexOf(element){
+      let current = this.#head
+      let index = 0
+      while (current){
+        if(current.element === element){
+          return index
+        }
+        index++
+        current = current.next
+      }
+
+      // 说明没有找到元素
+      return -1
+    }
+
+    /**
+     * 根据元素删除信息
+     * @param element 元素
+     * @returns {null|*} 返回被删除的数据
+     */
+    remove(element){
+      let index = this.indexOf(element)
+      return this.removeAt(index)
+    }
+
+    /**
+     * 判断链表是否为空
+     * @returns {boolean} 返回true或false
+     */
+    isEmpty(){
+      return this.#length === 0
+    }
+
+    /**
+     * 获取链表长度
+     * @returns {number}
+     */
+    size(){
+      return this.#length
+    }
+
+    /**
+     * 获取第一个元素
+     * @returns {*} 返回第一个元素
+     */
+    getFirst(){
+      return this.#head.element
+    }
+  }
+
+  const list = new LinkedList()
+  list.append('111')
+  list.append('222')
+  list.append('333')
+  list.append('444')
+  list.insert(2, 'fff')
+  list.removeAt(1)
+  console.log(list.toString())
+  console.log(list.indexOf('fff'))
+</script>
+</body>
+</html>
