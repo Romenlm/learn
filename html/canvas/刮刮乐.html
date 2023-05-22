@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>刮刮乐</title>
+  <style>
+    .box{
+      width: 250px;
+      height: 80px;
+      border: 1px solid #1491a7;
+      text-align: center;
+      line-height: 80px;
+      position: relative;
+      user-select: none;
+    }
+    #canvas{
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    奖状
+    <canvas width="250" height="80" id="canvas"></canvas>
+  </div>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#585454'
+  ctx.fillRect(0,0,250,80);
+  ctx.fill();
+  // 设置新画上的元素，实际就是擦除之前的元素
+  ctx.globalCompositeOperation = 'destination-out';
+  // 鼠标按下
+  canvas.onmousedown = function () {
+    canvas.onmousemove = function (event) {
+      ctx.beginPath();
+      ctx.arc(event.offsetX,event.offsetY,16,0,Math.PI*2,false);
+      ctx.fill();
+    }
+  }
+</script>
+</body>
+</html>

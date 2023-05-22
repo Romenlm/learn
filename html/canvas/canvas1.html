@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>canvas1</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #1491a7;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const body = document.querySelector('body')
+  let height = body.clientHeight
+  let width = body.clientWidth
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  // 设置画布宽高
+  canvas.width = width;
+  canvas.height = height;
+
+  /**
+   * 绘制圆
+   */
+  context.beginPath();
+  // 画一个圆，第一个参数表示x坐标，第二个参数表示y坐标，第三个参数表示圆半径，第四个参数为圆周长
+  /**
+   * x：圆心的 x 坐标
+   * y：圆心的 y 坐标
+   * r：圆的半径
+   * sAngle：起始角，以弧度计（弧的圆形的三点钟位置是 0 度）
+   * eAngle：结束角，以弧度计
+   * counterclockwise：可选。规定应该逆时针还是顺时针绘图。false 为顺时针，true 为逆时针
+   * */
+  context.arc(100, 100, 50, 0, Math.PI * 2, true);
+  // context.closePath(); // 创建从当前点回到起始点,表示会闭合
+  context.strokeStyle = 'rgba(0,0,0,1)'; // 设置或返回用于填充绘画的颜色、渐变或模式
+  context.stroke();
+
+  /**
+   * 总结得出画图步骤是：
+   * 1. 开始一个路径 beginPath
+   * 2. 绘制路径
+   * 3. 关闭路径 closePath
+   * 4. 设置填充颜色或描边颜色
+   * 5. 填充颜色或描边
+   */
+
+  // ==============================================================================
+  /**
+   * 绘制直线
+   */
+  context.beginPath();
+  context.moveTo(100, 100); // 开始坐标
+  context.lineTo(150, 100); // 结束坐标
+  // 没有设置 moveTo，而是设置了三个 lineTo，这也是可以的，将三个 lineTo 设置的点依次连接就好
+  // context.lineTo(200, 100);
+  // context.lineTo(100,50);
+  context.lineWidth = 10; // 设置线条的宽
+  // context.lineCap = 'round'; // 设置线条结束端点的样式为圆角
+  context.strokeStyle = 'rgb(196,14,14)';
+  context.stroke();
+
+  // ============================================================================
+  /**
+   * 绘制矩阵
+   */
+  context.beginPath();
+  context.shadowBlur = 20; // 设置阴影模糊级别
+  context.shadowColor = 'rgb(217,25,25)' // 阴影颜色
+  context.fillStyle = '#fff';
+  context.beginPath();
+  context.fillRect(200, 200, 300, 300); // 绘制填充矩阵
+  context.strokeStyle = '#fff';
+  context.lineWidth = 1;
+  context.strokeRect(100, 510, 200, 100); // 绘制线条矩阵
+</script>
+
+
+</body>
+</html>

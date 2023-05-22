@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>线型</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #d1d5d5;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+  const image = new Image();
+  image.src = './images/lun.png';
+  image.onload = function(){
+    let deg = 0;
+    let x = 200;
+    setInterval(()=>{
+      ctx.clearRect(0,0,WIDTH,HEIGHT)
+      deg += 0.1;
+      x++
+      ctx.save();
+      // 平移
+      ctx.translate(x,400);
+      ctx.rotate(deg);
+      // 此处的的图片位置是图片宽高的绝对值的一半。以自己为圆心
+      ctx.drawImage(image,-400/2,-400/2);
+      ctx.restore();
+    },10)
+  }
+
+
+</script>
+</body>
+</html>

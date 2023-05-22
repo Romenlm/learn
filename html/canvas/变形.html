@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>线型</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #d1d5d5;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+
+  /**
+   * canvas是可变形的，但是变形的不是元素，是整个画布ctx,ctx就是整个画布的渲染区，整个画布在变形
+   * * 我们需要在画布变形前进行保存和恢复
+   * * save() 保存画布的所有状态
+   * * restore() 恢复canvas状态
+   * 连个方法都没有参数
+   *
+   * 可能保存的状态有： strokeStyle, fillStyle, globalAlpha,
+   * lineWidth, lineCap, lineJoin, miterLimit, lineDashOffset,
+   * shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation,
+   * font, textAlign, textBaseline, direction, imageSmoothingEnabled
+   */
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+  function draw() {
+    ctx.fillRect(0,0,150,150);   // 使用默认设置绘制一个矩形
+    ctx.save();                  // 保存默认状态
+
+    ctx.fillStyle = '#09F'       // 在原有配置基础上对颜色做改变
+    ctx.fillRect(15,15,120,120); // 使用新的设置绘制一个矩形
+
+    ctx.save();                  // 保存当前状态
+    ctx.fillStyle = '#FFF'       // 再次改变颜色配置
+    ctx.globalAlpha = 0.5;
+    ctx.fillRect(30,30,90,90);   // 使用新的配置绘制一个矩形
+
+    ctx.restore();               // 重新加载之前的颜色状态
+    ctx.fillRect(45,45,60,60);   // 使用上一次的配置绘制一个矩形
+
+    ctx.restore();               // 加载默认颜色配置
+    ctx.fillRect(60,60,30,30);   // 使用加载的配置绘制一个矩形
+
+
+  }
+
+  draw();
+
+</script>
+</body>
+</html>

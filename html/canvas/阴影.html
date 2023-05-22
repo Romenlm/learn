@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>阴影</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #b7bcbd;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+  ctx.shadowColor = '#ea0958'
+  ctx.shadowOffsetX = 8; // 左右偏离的距离
+  ctx.shadowOffsetY = 8; // 上下偏离的距离
+  ctx.shadowBlur = 2; // 阴影模糊范围
+  ctx.font = '30px 宋体'
+  // 第二第三个参数表示坐标位置
+  ctx.fillText('你好，世界',100,100)
+
+</script>
+</body>
+</html>

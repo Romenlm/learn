@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>响应鼠标移动事件</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+  const para = {
+    num: 100,
+    color: false, // false表示随机渐变
+    r: 0.9, // 每次圆增加的半径
+    o: 0.09, // 判断圆消失的条件
+    a: 1
+  };
+  let color, color2, roundArr = [];
+
+  onmousemove = function (event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    roundArr.push({
+      mouseX: mouseX,
+      mouseY: mouseY,
+      r: para.r, // 设置半径每次增大的数值
+      o: 1 // 判断圆消失的条件，数值越大，消失的越快
+    })
+  }
+
+  if (para.color) {
+    color2 = para.color;
+  } else {
+    color = Math.random() * 360;
+  }
+  function animate() {
+    if (!para.color) {
+      color += 0.1;
+      color2 = `hsl(${color},100%,80%)`
+    }
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    for(let i = 0;i<roundArr.length;i++){
+      ctx.fillStyle  = color2;
+      ctx.beginPath();
+      ctx.arc( roundArr[i].mouseX ,roundArr[i].mouseY,roundArr[i].r,0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+      roundArr[i].r += para.r;
+      roundArr[i].o -= para.o;
+
+      if( roundArr[i].o <= 0){
+        roundArr.splice(i,1);
+        i--;
+      }
+    }
+    requestAnimationFrame(animate)
+  }
+
+  animate()
+</script>
+</body>
+</html>

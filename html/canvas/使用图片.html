@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>阴影</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #b7bcbd;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+
+  // 将图片导入进来，使用图片
+  const image = new Image();
+  image.src = './images/user-log.png';
+  image.onload = () => {
+    // 第二和第三个参数表示图片加载的位置，如果有第四个参数，表示宽，第五个参数表示高
+    // ctx.drawImage(image, 100, 100, 300, 200)
+    // 如果是八个参数,2，3参数表示切片的起始位置，4，5表示切片的宽高。后四个参数表示切片在画布上的位置
+    ctx.drawImage(image, 0, 0, 100, 100,200,200,300,300)
+  }
+
+</script>
+</body>
+</html>

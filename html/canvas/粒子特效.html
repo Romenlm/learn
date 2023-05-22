@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>粒子特效</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #2b2d2d;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<script>
+
+  const body = document.querySelector('body');
+  const HEIGHT = body.clientHeight, WIDTH = body.clientWidth;
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+
+  const ctx = canvas.getContext('2d')
+
+  /**
+   * 圆的类
+   * @param index 唯一标识符
+   * @param x x坐标
+   * @param y y坐标
+   * @constructor
+   */
+  class RoundItem {
+    constructor(index, x, y) {
+      this.index = index;
+      this.x = x;
+      this.y = y;
+      this.r = Math.PI * 2 + 1;
+      // 随机透明度
+      let alpha = (Math.floor(Math.random() * 10 + 1)) / 10 / 2;
+      this.color = `rgba(255,255,255,${alpha})`;
+    }
+
+    /**
+     * 画圆方法
+     * @param context
+     */
+    draw(context) {
+      context.fillStyle = this.color;
+      // 设置阴影范围
+      context.shadowBlur = this.r * 2;
+      context.beginPath();
+      context.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+      context.closePath();
+      context.fill()
+    }
+
+    /**
+     * 移动粒子，只要改变y轴的变化即可，当y<-10，就让其移动到低端
+     */
+    move(ctx){
+      this.y -= 0.15;
+      if(this.y <= -10){
+        this.y = HEIGHT + 10
+      }
+      this.draw(ctx);
+    }
+  }
+
+  let num = 80;
+  let runds = []
+
+  /**
+   * 初始化粒子
+   */
+  function init() {
+    for (let i = 0; i < num; i++) {
+      // 使用循环创建实例，使用随机的坐标
+      runds[i] = new RoundItem(i, Math.random() * WIDTH, Math.random() * HEIGHT);
+      runds[i].draw(ctx)
+    }
+    animate();
+  }
+
+  /**
+   * 粒子动画，不断的清除画布并重新绘制粒子
+   */
+  function animate() {
+    // 清除画布
+    ctx.clearRect(0,0,WIDTH,HEIGHT);
+    for(let i in runds){
+      runds[i].move(ctx);
+    }
+    requestAnimationFrame(animate);
+  }
+  init();
+</script>
+</body>
+</html>

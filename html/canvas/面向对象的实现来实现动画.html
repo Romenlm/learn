@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>面向对象实现动画</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #1491a7;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+  class Rect{
+    constructor(x,y,w,h,color) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.color = color
+    }
+
+    /**
+     * 更新的方法
+     */
+    update(width){
+      if(this.x>width){
+        this.x = 0
+      } else {
+        this.x++
+      }
+
+    }
+
+    /**
+     * 渲染的方法
+     * @param ctx
+     */
+    render(ctx){
+      ctx.fillStyle = this.color;
+      ctx.fillRect(this.x,this.y,this.w,this.h)
+    }
+  }
+
+  const rect = new Rect(0,100,100,100,'red')
+  /**
+   * 使用定时器实现画布动画
+   */
+  setInterval(()=>{
+    ctx.clearRect(0,0,WIDTH,HEIGHT);
+    rect.update(WIDTH);
+    rect.render(ctx)
+  },10)
+</script>
+</body>
+</html>

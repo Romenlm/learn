@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>小球连线</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #d1d5d5;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+
+  /**
+   * 球类
+   * @constructor
+   */
+  class Ball {
+    constructor(r, width, height,index) {
+      this.x = parseInt(Math.random() * width) - 20;
+      this.y = parseInt(Math.random() * height) - 20;
+      this.r = r
+      // 设置随机颜色
+      this.color = this.getRandomColor();
+      // 设置行进方向
+      this.dx = parseInt(Math.random() * 10) - 5;
+      this.dy = parseInt(Math.random() * 10) - 5;
+      this.index = index
+    }
+
+    /**
+     * 画小球
+     * @param ctx
+     */
+    render(ctx,balls) {
+      ctx.beginPath();
+      ctx.globalAlpha = 1; // 设置透明度
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+      ctx.fillStyle = this.color;
+      ctx.fill()
+
+      // 画线,遍历小球
+      let len = balls.length
+      // 划线只画比自己大的一方就可以， i = this.index
+      for (let i = this.index; i < len; i++) {
+        // 判断是两小球之间是否小于150，小于就画线,
+        if (Math.abs(balls[i].x - this.x) < 150 && Math.abs(balls[i].y - this.y) < 150) {
+          ctx.beginPath();
+          // 设置连线的透明度
+          ctx.globalAlpha = 10/Math.sqrt(Math.pow(balls[i].x - this.x,2) + Math.pow(balls[i].y - this.y,2))
+          ctx.moveTo(this.x,this.y);
+          ctx.lineTo(balls[i].x,balls[i].y)
+          ctx.lineWidth = 2
+          ctx.strokeStyle = this.getRandomColor();
+          ctx.stroke()
+        }
+      }
+    }
+
+    update(width, height) {
+      this.x += this.dx;
+      this.y += this.dy;
+      if (this.x < this.r || this.x > width - this.r) {
+        this.dx = -this.dx
+      }
+      if (this.y < this.r || this.y > height - this.r) {
+        this.dy = -this.dy
+      }
+    }
+
+    getRandomColor() {
+      const allType = '0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f'
+      const allTypeArray = allType.split(',');
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        const random = parseInt(Math.random() * allTypeArray.length);
+        color += allTypeArray[random]
+      }
+      return color
+    }
+
+  }
+
+  const arr = []
+  let num = 60;
+  for (let i = 0; i < num; i++) {
+    // 保存小球
+    arr.push(new Ball(10, WIDTH, HEIGHT,i))
+  }
+
+  setInterval(() => {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT)
+    let len = arr.length
+    for (let i = 0; i < len; i++) {
+      arr[i].update(WIDTH, HEIGHT)
+      arr[i].render(ctx,arr)
+    }
+  }, 100)
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>面向对象实现动画</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      background-color: #1491a7;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const HEIGHT = document.documentElement.clientHeight;
+  const WIDTH = document.documentElement.clientWidth
+  const canvas = document.getElementById('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const ctx = canvas.getContext('2d');
+
+
+  // 创建一个路径
+  ctx.beginPath();
+  // 移动绘制点
+  ctx.moveTo(100,100); // 可以没有
+  // 描述进行路径
+  ctx.lineTo(200,200);
+  ctx.lineTo(300,300); // 会以上一个点为开始节点开始绘制
+  ctx.lineTo(100,400);
+  // 封闭路径,如果没有表示不封闭路径
+  // ctx.closePath();
+  // ctx.fillStyle = 'red' // 表示填充颜色
+  // ctx.fill(); // 表示填充
+  ctx.strokeStyle = 'red'; // 表示绘制路径颜色
+  ctx.stroke();
+</script>
+</body>
+</html>
